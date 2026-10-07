@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,12 @@ public class CellSize : MonoBehaviour
     public static readonly List<CellSize> All = new List<CellSize>();
 
     public float Points { get; private set; }
+
+    /// <summary>True kalau karakter ini sudah dimakan.</summary>
+    public bool IsDead { get; private set; }
+
+    /// <summary>Dipanggil sekali saat karakter ini dimakan.</summary>
+    public event Action<CellSize> Eaten;
 
     private void Awake()
     {
@@ -38,6 +45,22 @@ public class CellSize : MonoBehaviour
     public void AddPoints(float amount)
     {
         Points += amount;
+        ApplyScale();
+    }
+
+    /// <summary>Tandai karakter ini dimakan. Hanya berlaku sekali.</summary>
+    public void MarkEaten()
+    {
+        if (IsDead) return;
+        IsDead = true;
+        Eaten?.Invoke(this);
+    }
+
+    /// <summary>Kembalikan ke kondisi awal (dipakai saat respawn).</summary>
+    public void ResetCell()
+    {
+        IsDead = false;
+        Points = startPoints;
         ApplyScale();
     }
 
