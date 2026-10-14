@@ -14,7 +14,7 @@ public class PlayerEat : MonoBehaviour
         if (trash == null) return;
 
         // Player membesar
-        transform.localScale += new Vector3(trash.growAmount, trash.growAmount, 0f);
+        GetComponent<CellSize>().AddPoints(trash.growAmount);
         totalScore += trash.score;
 
         // sampah hilang, spawner akan mengisi lagi
