@@ -862,6 +862,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &737168481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 737168483}
+  - component: {fileID: 737168482}
+  m_Layer: 0
+  m_Name: TrashSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &737168482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737168481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9e238b15665a74988dcd5ae56945c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashSpawner
+  trashPrefabs:
+  - {fileID: 6586904552274610940, guid: 973191652c81558408334d437f797e38, type: 3}
+  - {fileID: 6586904552274610940, guid: 40b30c05d4c3f0e47b1ee0ddf28c5be9, type: 3}
+  mapSize: {x: 10, y: 10}
+  maxTrash: 40
+  spawnInterval: 0.5
+--- !u!4 &737168483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737168481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.11973, y: 0.11291, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &968746915
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,6 +927,7 @@ GameObject:
   - component: {fileID: 968746916}
   - component: {fileID: 968746921}
   - component: {fileID: 968746922}
+  - component: {fileID: 968746923}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1066,6 +1117,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CellEater
   sizeMargin: 1.1
   gainRatio: 1
+--- !u!114 &968746923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968746915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0de13b67bb05b4baa6316ebbc05d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEat
+  foodTag: food
+  totalScore: 0
 --- !u!1 &1219207182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,3 +1595,4 @@ SceneRoots:
   - {fileID: 1852212713}
   - {fileID: 1855317513}
   - {fileID: 2012130600}
+  - {fileID: 737168483}
