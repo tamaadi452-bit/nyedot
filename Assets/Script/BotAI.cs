@@ -24,10 +24,17 @@ public class BotAI : MonoBehaviour
     [Tooltip("Tiap berapa detik bot ganti arah kalau tidak ada target")]
     [SerializeField] private float wanderChangeTime = 2.5f;
 
+    [Header("Cari Sampah")]
+    [Tooltip("Tiap berapa detik bot nyari sampah terdekat (biar gak berat)")]
+    [SerializeField] private float trashSearchInterval = 0.25f;
+
     private Rigidbody2D rb;
     private CellSize me;
     private Vector2 moveDirection;
     private float wanderTimer;
+    private Transform targetTrash;
+    private float trashTimer;
+
 
     private void Awake()
     {
@@ -71,15 +78,56 @@ public class BotAI : MonoBehaviour
         }
         else
         {
-            wanderTimer -= Time.deltaTime;
-            if (wanderTimer <= 0f)
-                PickRandomDirection();
+            trashTimer -= Time.deltaTime;
+            if (trashTimer <= 0f)
+            {
+                trashTimer = trashSearchInterval;
+                targetTrash = FindNearestTrash();
+            }
+
+            if (targetTrash != null)
+            {
+                moveDirection = ((Vector2)targetTrash.position - (Vector2)transform.position).normalized;
+            }
+            else
+            {
+                wanderTimer -= Time.deltaTime;
+                if (wanderTimer <= 0f)
+                    PickRandomDirection();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveDirection * moveSpeed;
+        float mult = SizeSpeed.Multiplier(me.Points);
+        rb.linearVelocity = moveDirection * moveSpeed * mult;
+
+        if (MapBoundary.Instance != null)
+        {
+        float radius = transform.localScale.x / 2f;
+        rb.position = MapBoundary.Instance.Clamp(rb.position, radius);
+        }
+    }
+
+    private Transform FindNearestTrash()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, detectRadius);
+        Transform nearest = null;
+        float best = float.MaxValue;
+
+        foreach (Collider2D hit in hits)
+        {
+            if (!hit.TryGetComponent(out TrashItem _)) continue;
+
+            float d = ((Vector2)hit.transform.position - (Vector2)transform.position).sqrMagnitude;
+            if (d < best)
+            {
+            best = d;
+            nearest = hit.transform;
+            }
+        }   
+        return nearest;
     }
 
     private void PickRandomDirection()

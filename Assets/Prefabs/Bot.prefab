@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8520555552404260794}
   - component: {fileID: 5389081218979004283}
   - component: {fileID: 7244053287718888233}
+  - component: {fileID: -3921540639794733604}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -203,8 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7b3b2a2461a4e4da44b9ee422a51f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CellEater
-  sizeMargin: 1.1
-  gainRatio: 1
+  eatRatio: 1.1
+  gainPercent: 1
 --- !u!114 &7244053287718888233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,3 +220,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BotRespawn
   respawnDelay: 3
   areaHalfSize: 15
+--- !u!114 &-3921540639794733604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495676637960860681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a0de13b67bb05b4baa6316ebbc05d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerEat
+  foodTag: food
+  totalScore: 0

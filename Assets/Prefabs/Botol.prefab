@@ -142,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ced9782e7946a44e98103dfe3e3c7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrashItem
-  growAmount: 0.06
+  growAmount: 2
   score: 1

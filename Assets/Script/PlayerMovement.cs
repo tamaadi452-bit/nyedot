@@ -21,10 +21,12 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveDirection = Vector2.zero;
+    private CellSize me;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        me = GetComponent<CellSize>();
     }
 
     private void Update()
@@ -56,7 +58,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveDirection * moveSpeed;
+        float mult = SizeSpeed.Multiplier(me.Points);
+        rb.linearVelocity = moveDirection * moveSpeed * mult;
+
+        if (MapBoundary.Instance != null)
+        {
+        float radius = transform.localScale.x / 2f;
+        rb.position = MapBoundary.Instance.Clamp(rb.position, radius);
+        }
     }
 
     // Keyboard WASD / panah, hanya untuk testing di editor.

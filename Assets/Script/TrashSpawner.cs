@@ -40,9 +40,9 @@ public class TrashSpawner : MonoBehaviour
         if (trashPrefabs.Length == 0) return;
 
         GameObject prefab = trashPrefabs[Random.Range(0, trashPrefabs.Length)];
-        Vector2 pos = new Vector2(
-            Random.Range(-mapSize.x, mapSize.x),
-            Random.Range(-mapSize.y, mapSize.y));
+        Vector2 pos = MapBoundary.Instance != null
+            ? MapBoundary.Instance.RandomPoint()
+            : new Vector2(Random.Range(-mapSize.x, mapSize.x), Random.Range(-mapSize.y, mapSize.y));
 
         GameObject trash = Instantiate(prefab, pos, Quaternion.identity);
         activeTrash.Add(trash);
